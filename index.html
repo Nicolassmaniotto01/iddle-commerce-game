@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Idle Commerce</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- pequeno CSS para start overlay caso não esteja no arquivo principal -->
+  <style>
+    .overlay{
+      position:fixed;
+      inset:0;
+      background: radial-gradient(circle at top, rgba(27,32,96,0.95), rgba(12,15,31,0.98));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+    }
+    .overlay:not(.active){ display:none; }
+    .start-card{ max-width:420px; width:100%; text-align:center; padding:18px; border-radius:12px; }
+    .start-card input{ width:100%; margin-bottom:10px; padding:10px; border-radius:8px; border:none; }
+  </style>
+</head>
+<body>
+
+<!-- ================= START SCREEN ================= -->
+<div id="startScreen" class="overlay active">
+  <div class="card start-card">
+    <h1>🏪 Idle Commerce</h1>
+
+    <input id="storeNameInput" type="text" placeholder="Nome da sua loja" />
+
+    <button class="main-action" onclick="newGame()">🆕 Novo Jogo</button>
+
+    <button id="continueBtn" class="card" style="display:none" onclick="continueGame()">▶️ Continuar</button>
+
+    <input type="file" id="importInput" hidden />
+    <button class="card" onclick="importSave()">📥 Importar Save</button>
+
+  </div>
+</div>
+
+<!-- ================= GAME WRAPPER ================= -->
+<div id="gameWrapper" style="display:none">
+
+<header>
+  <div class="header-left">
+    <div class="money">💰 <span id="coins">0</span></div>
+    <div class="stats">
+      <strong id="storeName">Minha Loja</strong><br>
+      +<span id="cps">0</span>/s &nbsp;|&nbsp; +<span id="cpc">1</span>/click
+    </div>
+  </div>
+  <div class="header-right">
+    <button id="soundBtn" class="icon-btn">🔊</button>
+  </div>
+</header>
+
+<nav class="main-nav" role="navigation" aria-label="Main">
+  <button class="nav-btn active" onclick="openTab('home', this)">🏠 Inicial</button>
+  <button class="nav-btn" onclick="openTab('shop', this)">🏪 Loja</button>
+  <button class="nav-btn" onclick="openTab('products', this)">📦 Produtos</button>
+  <button class="nav-btn" onclick="openTab('employees', this)">👨‍💼 Funcionários</button>
+  <button class="nav-btn" onclick="openTab('missions', this)">🎯 Missões</button>
+  <button class="nav-btn" onclick="openTab('prestige', this)">🔥 Prestígio</button>
+  <button class="nav-btn" onclick="openTab('info', this)">📊 Info</button>
+</nav>
+
+<main>
+  <!-- HOME -->
+  <section id="home" class="tab active">
+    <div class="section">
+      <h2>🛒 Venda</h2>
+      <button id="clickButton" class="main-action">Registrar Venda</button>
+      <div id="eventBox" class="card" style="margin-top:12px;">Eventos aparecerão aqui</div>
+      <div style="margin-top:12px;">
+        <div class="card">
+          <strong>Resumo rápido</strong>
+          <div class="meta">CPC: <span id="cpc">1</span></div>
+          <div class="meta">CPS: <span id="cps">0</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP -->
+  <section id="shop" class="tab">
+    <div class="section">
+      <h2>🏪 Loja</h2>
+      <p>Upgrades permanentes (cada compra aumenta o custo).</p>
+      <div id="shopList" class="grid"></div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products" class="tab">
+    <div class="section">
+      <h2>📦 Produtos</h2>
+      <p>Compre estoque e venda manual/funcionários vendem automaticamente.</p>
+      <div id="productList" class="grid"></div>
+    </div>
+  </section>
+
+  <!-- EMPLOYEES -->
+  <section id="employees" class="tab">
+    <div class="section">
+      <h2>👨‍💼 Funcionários</h2>
+      <p>Contrate e suba níveis — cada contratação aumenta custo.</p>
+      <div id="employeeList" class="grid"></div>
+    </div>
+  </section>
+
+  <!-- MISSIONS -->
+  <section id="missions" class="tab">
+    <div class="section">
+      <h2>🎯 Missões</h2>
+      <div id="missionsList" class="grid"></div>
+    </div>
+  </section>
+
+  <!-- PRESTIGE -->
+  <section id="prestige" class="tab">
+    <div class="section">
+      <h2>🔥 Prestígio</h2>
+      <p>Pontos de prestígio: <strong id="prestigePoints">0</strong></p>
+      <div id="prestigeTree" class="grid"></div>
+      <div style="margin-top:12px;">
+        <button class="card" onclick="doPrestige()">Resetar para ganhar Pontos de Prestígio</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO -->
+  <section id="info" class="tab">
+    <div class="section">
+      <h2>📊 Informações</h2>
+      <div id="infoBox"></div>
+
+      <button class="card" onclick="exportSave()">📤 Exportar Save</button>
+      <button class="reset" onclick="resetGame()">Resetar Jogo</button>
+    </div>
+  </section>
+</main>
+
+</div>
+
+<script src="js/game.js"></script>
+</body>
+</html>

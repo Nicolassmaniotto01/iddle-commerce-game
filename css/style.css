@@ -1,0 +1,27 @@
+:root{ --bg:#0c0f1f; --panel:#13183a; --card1:linear-gradient(180deg,#1b2060,#161a45); --text:#e6e9ff; --muted:#b8c1ff; --accent:#4b5cff; --border: rgba(255,255,255,0.06); --success: #6fe3a7; --good: #6fe3a7; --bad: #ff7a7a; } *{box-sizing:border-box} body{ margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: var(--bg); color: var(--text); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; min-height:100vh; display:flex; flex-direction:column; } /* header */ header{ display:flex; justify-content:space-between; align-items:center; padding:18px 24px; background:#14183d; border-bottom: 1px solid var(--border); } .header-left { display:flex; flex-direction:column; gap:6px; } .money{ font-size:20px; font-weight:700; color:var(--success); } .stats { font-size:13px; color:var(--muted); } /* sound */ .icon-btn{ background:#1a1f52; border: 1px solid rgba(255,255,255,0.06); color:var(--text); padding:8px 12px; border-radius:10px; cursor:pointer; } /* nav */ .main-nav{ display:flex; gap:0; background:#0f1330; border-bottom:1px solid var(--border); } .nav-btn{ flex:1; padding:12px 14px; background:none; border:none; color:var(--muted); cursor:pointer; transition: background .15s, color .15s; } .nav-btn.active{ background: linear-gradient(180deg, rgba(75,92,255,0.12), rgba(75,92,255,0.06)); color: var(--accent); font-weight:700; } /* main */ main{ padding:28px; flex:1; overflow:auto; } /* section */ .section{ background: var(--panel); border-radius:14px; padding:20px; margin-bottom:22px; border:1px solid var(--border); } .section h2{ margin:0 0 12px; } /* grid */ .grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap:16px; } /* card */ .card{ background: var(--card1); border-radius:12px; padding:14px; border:1px solid var(--border); display:flex; flex-direction:column; justify-content:space-between; min-height:120px; box-shadow: 0 6px 22px rgba(0,0,0,0.45); } .card strong{ font-size:16px; display:block; margin-bottom:6px; } .card .meta{ color:var(--muted); font-size:13px; } /* event box */ #eventBox { min-height:48px; } /* missions */ .mission-card { background: linear-gradient(180deg,#23306a,#1b2346); border-radius:12px; padding:12px; border:1px solid rgba(255,255,255,0.04); } .mission-card .goal { color:var(--muted); font-size:13px; margin-bottom:8px; } .claim-btn { margin-top:8px; padding:8px; border-radius:8px; width:100%; border:none; background:#4bde9b; color:#072214; cursor:pointer; } /* prestige tree */ .prestige-card{ padding:12px; border-radius:10px; background: linear-gradient(180deg,#272b56,#1b1f3b); border:1px solid rgba(255,255,255,0.04); } .buy-prestige-btn{ width:100%; padding:8px; border-radius:8px; border:none; background:#ffb347; color:#1b0b00; cursor:pointer; } /* card buttons */ .card button{ margin-top:12px; padding:10px; border-radius:10px; border:none; background: var(--accent); color:white; cursor:pointer; transition:transform .12s, filter .12s; } .card button:hover{ transform:translateY(-3px); filter:brightness(1.05); } /* main action */ .main-action{ width:100%; padding:34px; font-size:22px; border-radius:12px; border:none; background: linear-gradient(135deg,#4b5cff,#2b39ff); color:white; cursor:pointer; box-shadow: 0 12px 40px rgba(43,57,255,0.12); } /* reset */ .reset{ margin-top:14px; padding:12px; border-radius:10px; border:none; background:#c0392b; color:white; cursor:pointer; } /* safety tabs */ .tab{ display:none !important; } .tab.active{ display:block !important; } /* responsive */ @media (max-width:720px){ .grid{ grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); } main{ padding:16px; } }
+/* START SCREEN */
+.overlay{
+  position:fixed;
+  inset:0;
+  background: radial-gradient(circle at top, #1b2060, #0c0f1f);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+.overlay:not(.active){
+  display:none;
+}
+
+.start-card{
+  max-width:360px;
+  width:100%;
+  text-align:center;
+}
+.start-card h1{
+  margin-bottom:16px;
+}
+.start-card button{
+  width:100%;
+  margin-top:10px;
+}

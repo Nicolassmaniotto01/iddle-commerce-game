@@ -1,0 +1,10 @@
+{
+  "name": "idlecommerce",
+  "version": "1.0.0",
+  "scripts": {
+    "obf": "javascript-obfuscator js/game.js --output js-obf/game.js"
+  },
+  "dependencies": {
+    "javascript-obfuscator": "^4.1.0"
+  }
+}
