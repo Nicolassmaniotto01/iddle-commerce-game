@@ -481,3 +481,60 @@ window.onload=()=>{
   const s=loadGame();
   if(s) continueBtn.style.display="block";
 };
+
+/* -------- Sound toggle -------- */
+let soundOn = true; // estado do som
+
+const soundBtn = document.getElementById("soundBtn");
+if(soundBtn){
+  soundBtn.addEventListener("click", ()=>{
+    soundOn = !soundOn;
+    soundBtn.textContent = soundOn ? "🔊" : "🔇";
+  });
+}
+
+// Exemplo de uso do som: tocar efeito quando venda manual
+function playClickSound(){
+  if(!soundOn) return;
+  const audio = new Audio("sounds/Blip20.wav"); // coloque um arquivo click.mp3 na pasta sounds
+  audio.play();
+}
+
+// Atualize a função de venda manual para tocar som
+function registrarVendaManual(){
+  let produto = null;
+  let melhorMargem = -Infinity;
+
+  PRODUCTS.forEach(p=>{
+    const stock = game.products[p.id] || 0;
+    if(stock > 0){
+      const margem = p.sell - p.buy;
+      if(margem > melhorMargem){
+        melhorMargem = margem;
+        produto = p;
+      }
+    }
+  });
+
+  if(!produto){
+    const ganho = game.cpc + (game.prestigeCpcFlat || 0);
+    game.coins += ganho;
+    game.sales++;
+    game.totalEarned += ganho;
+    updateMissions();
+    updateUI();
+    playClickSound(); // <--- toca som
+    return;
+  }
+
+  game.products[produto.id]--;
+  const lucro = produto.sell * (1 + (game.prestigeBonusProfit || 0));
+  game.coins += lucro;
+  game.sales++;
+  game.totalEarned += lucro;
+
+  updateMissions();
+  updateUI();
+  playClickSound(); // <--- toca som
+}
+
